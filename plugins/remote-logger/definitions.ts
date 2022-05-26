@@ -13,14 +13,14 @@ export interface RemoteLoggerPlugin {
 
 
     /**
-     * Log a message to the remote logging service
+     * Log a message (js object) to the remote logging service
      */
-    log(message, ...args): void;
+    write(message: object): Promise<void>;
 
     /**
      * Initialize the plugin
      */
-     initialize(): Promise<boolean>;
+    initialize(options: Options): Promise<void>;
 
     /**
      * Listens for status changes.
@@ -85,5 +85,16 @@ export interface LogStatus {
      * Message
      */
     message: string;
+}
 
+export interface Options {
+    /**
+     * Host name of the remote logging server
+     */
+    hostName: string;
+
+    /**
+     * Port number of the remote logging server
+     */
+    port: number;
 }

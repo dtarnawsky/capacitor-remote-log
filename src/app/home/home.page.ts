@@ -9,14 +9,24 @@ export class HomePage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    RemoteLogger.hostName = 'localhost';
-    RemoteLogger.port = 8942;
+  async ngOnInit() {
+    // RemoteLogger.hostName = 'localhost';
+    // RemoteLogger.port = 8942;
     RemoteLogger.addListener('logStatusChange', (status: LogStatus) => {
       console.log('status is ', status);
     });
 
-    RemoteLogger.initialize();
-    RemoteLogger.log('hi there', { txt: 'test', id: 123123, payload: 'blar' });
+    const options = { hostName: 'localhost', port: 8942};
+    console.log('Calling initialize', options);
+    await RemoteLogger.initialize(options);
+    RemoteLogger.write({ txt: 'test', id: 123123, payload: 'blar' });
+  }
+
+  logStuff() {
+    console.log(new Date());
+  }
+
+  logPlugin() {
+    RemoteLogger.write(new Date());
   }
 }

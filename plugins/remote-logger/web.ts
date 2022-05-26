@@ -1,8 +1,7 @@
 import { WebPlugin } from '@capacitor/core';
-import { RemoteLogger } from '.';
-import type { RemoteLoggerPlugin } from './definitions';
+import type { Options, RemoteLoggerPlugin } from './definitions';
 
-export class RemoteLoggerWeb extends WebPlugin {
+export class RemoteLoggerWeb extends WebPlugin implements RemoteLoggerPlugin {
     private static that;
     private static privateLog;
     private static privateWarn;
@@ -37,28 +36,39 @@ export class RemoteLoggerWeb extends WebPlugin {
         this.notifyListeners('logStatusChange', { code: 'code', message: 'RemoteLogger Started.' });
     }
 
+    public write(message): Promise<void> {
+        RemoteLoggerWeb.that.write(message, 'log');
+        return Promise.resolve();
+    }
+
     public log(message, ...args) {
         RemoteLoggerWeb.privateLog.call(this, message, ...args);
-        RemoteLoggerWeb.that.write(message, args, 'log');
+        RemoteLoggerWeb.that.push(message, args, 'log');
     }
 
     public warn(message, ...args) {
         RemoteLoggerWeb.privateWarn.call(this, message, ...args);
-        RemoteLoggerWeb.that.write(message, args, 'warn');
+        RemoteLoggerWeb.that.push(message, args, 'warn');
     }
 
     public error(message, ...args) {
         RemoteLoggerWeb.privateError.call(this, message, ...args);
-        RemoteLoggerWeb.that.write(message, args, 'error');
+        RemoteLoggerWeb.that.push(message, args, 'error');
     }
 
     public info(message, ...args) {
         RemoteLoggerWeb.privateInfo.call(this, message, ...args);
-        RemoteLoggerWeb.that.write(message, args, 'info');
+        RemoteLoggerWeb.that.push(message, args, 'info');
     }
 
-    public initialize(): Promise<boolean> {
+    public initialize(options: Options): Promise<void> {
         let lastUrl: string;
+        if (options?.hostName) {
+            this.hostName = options.hostName;
+        }
+        if (options?.port) {
+            this.port = options.port;
+        }
         this.post('/devices', {
             id: this.getDeviceIdentifier(),
             userAgent: window.navigator.userAgent,
@@ -72,7 +82,7 @@ export class RemoteLoggerWeb extends WebPlugin {
                 this.log(`Url changed to ${lastUrl}`);
             }
         }, 1000);
-        return Promise.resolve(true);
+        return Promise.resolve();
     }
 
     async post(url: string, data: any): Promise<any> {
@@ -96,7 +106,7 @@ export class RemoteLoggerWeb extends WebPlugin {
         }
     }
 
-    private write(message, _arguments, level) {
+    private push(message, _arguments, level) {
         const args = Array.prototype.slice.call(_arguments);
         let msg = message;
         args.forEach((element) => {
@@ -138,3 +148,7 @@ export class RemoteLoggerWeb extends WebPlugin {
         return id.toString();
     }
 }
+
+const RemoteLogger = new RemoteLoggerWeb();
+
+export { RemoteLogger };
