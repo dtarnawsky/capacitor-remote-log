@@ -1,0 +1,7 @@
+{
+  "name": "cap-remote-log",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
