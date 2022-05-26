@@ -15,7 +15,7 @@ export interface RemoteLoggerPlugin {
     /**
      * Log a message to the remote logging service
      */
-    log(message: LogMessage): Promise<boolean>;
+    log(message, ...args): void;
 
     /**
      * Initialize the plugin

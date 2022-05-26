@@ -17,6 +17,6 @@ export class HomePage implements OnInit {
     });
 
     RemoteLogger.initialize();
-    RemoteLogger.log({level: 'info', message: 'hi'});
+    RemoteLogger.log('hi there', { txt: 'test', id: 123123, payload: 'blar' });
   }
 }

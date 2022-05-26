@@ -80,7 +80,7 @@ export class RemoteLoggerWeb extends WebPlugin {
         if (!data) {
             return Promise.resolve();
         }
-        const remoteUrl = `http://${remoteHost}${url}`
+        const remoteUrl = `http://${remoteHost}${url}`;
         try {
             const response: Response = await fetch(remoteUrl, {
                 method: 'post',
