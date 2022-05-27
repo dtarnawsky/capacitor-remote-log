@@ -1,4 +1,4 @@
-import type { PluginListenerHandle } from '@capacitor/core';
+import type { PluginListenerHandle } from "@capacitor/core";
 
 export interface CapacitorRemoteLoggerPlugin {
   /**
@@ -21,8 +21,8 @@ export interface CapacitorRemoteLoggerPlugin {
    * Listens for status changes.
    */
   addListener(
-    eventName: 'logStatusChange',
-    listenerFunc: (status: LogStatus) => void,
+    eventName: "logStatusChange",
+    listenerFunc: (status: LogStatus) => void
   ): Promise<PluginListenerHandle> & PluginListenerHandle;
   /**
    * Removes all listeners
@@ -37,7 +37,7 @@ export interface LogMessage {
   /**
    * Log Level
    */
-  level: 'trace' | 'debug' | 'info' | 'warn' | 'error';
+  level: "trace" | "debug" | "info" | "warn" | "error";
   /**
    * Log Message
    */
@@ -65,7 +65,7 @@ export interface LogStatus {
   /**
    * Status Code
    */
-  code: 'network' | 'error' | 'ok';
+  code: "network" | "error" | "ok";
   /**
    * Message
    */

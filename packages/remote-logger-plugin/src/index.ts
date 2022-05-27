@@ -1,13 +1,13 @@
-import { registerPlugin } from '@capacitor/core';
+import { registerPlugin } from "@capacitor/core";
 
-import type { CapacitorRemoteLoggerPlugin } from './definitions';
+import type { CapacitorRemoteLoggerPlugin } from "./definitions";
 
 const RemoteLogger = registerPlugin<CapacitorRemoteLoggerPlugin>(
-  'RemoteLogger',
+  "RemoteLogger",
   {
-    web: () => import('./web').then(m => new m.RemoteLoggerWeb()),
-  },
+    web: () => import("./web").then((m) => new m.RemoteLoggerWeb()),
+  }
 );
 
-export * from './definitions';
+export * from "./definitions";
 export { RemoteLogger };

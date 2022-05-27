@@ -1,10 +1,10 @@
-import { WebPlugin } from '@capacitor/core';
+import { WebPlugin } from "@capacitor/core";
 
 import type {
   Options,
   CapacitorRemoteLoggerPlugin,
   LogMessage,
-} from './definitions';
+} from "./definitions";
 
 export declare class RemoteLoggerWeb
   extends WebPlugin

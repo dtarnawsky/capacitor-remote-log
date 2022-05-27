@@ -1,20 +1,20 @@
 var capacitorCapacitorRemoteLogger = (function (exports, core) {
-  'use strict';
+  "use strict";
 
-  const RemoteLogger$1 = core.registerPlugin('RemoteLogger', {
+  const RemoteLogger$1 = core.registerPlugin("RemoteLogger", {
     web: () =>
       Promise.resolve()
         .then(function () {
           return web;
         })
-        .then(m => new m.RemoteLoggerWeb()),
+        .then((m) => new m.RemoteLoggerWeb()),
   });
 
   /* eslint-disable @typescript-eslint/ban-ts-comment */
   class RemoteLoggerWeb extends core.WebPlugin {
     constructor() {
       super();
-      this.hostName = 'localhost';
+      this.hostName = "localhost";
       this.port = 8942;
       this.pending = undefined;
       if (RemoteLoggerWeb.that === undefined) {
@@ -28,20 +28,20 @@ var capacitorCapacitorRemoteLogger = (function (exports, core) {
         window.console.error = this.error;
         window.console.info = this.info;
       }
-      this.notifyListeners('logStatusChange', {
-        code: 'code',
-        message: 'RemoteLogger Started.',
+      this.notifyListeners("logStatusChange", {
+        code: "code",
+        message: "RemoteLogger Started.",
       });
     }
     write(ob) {
       switch (ob.level) {
-        case 'warn':
+        case "warn":
           this.warn(ob.message);
           break;
-        case 'error':
+        case "error":
           this.error(ob.message);
           break;
-        case 'info':
+        case "info":
           this.info(ob.message);
           break;
         default:
@@ -51,19 +51,19 @@ var capacitorCapacitorRemoteLogger = (function (exports, core) {
     }
     log(message, ...args) {
       RemoteLoggerWeb.privateLog.call(this, message, ...args);
-      RemoteLoggerWeb.that.push(message, args, 'log');
+      RemoteLoggerWeb.that.push(message, args, "log");
     }
     warn(message, ...args) {
       RemoteLoggerWeb.privateWarn.call(this, message, ...args);
-      RemoteLoggerWeb.that.push(message, args, 'warn');
+      RemoteLoggerWeb.that.push(message, args, "warn");
     }
     error(message, ...args) {
       RemoteLoggerWeb.privateError.call(this, message, ...args);
-      RemoteLoggerWeb.that.push(message, args, 'error');
+      RemoteLoggerWeb.that.push(message, args, "error");
     }
     info(message, ...args) {
       RemoteLoggerWeb.privateInfo.call(this, message, ...args);
-      RemoteLoggerWeb.that.push(message, args, 'info');
+      RemoteLoggerWeb.that.push(message, args, "info");
     }
     initialize(options) {
       let lastUrl;
@@ -73,7 +73,7 @@ var capacitorCapacitorRemoteLogger = (function (exports, core) {
       if (options === null || options === void 0 ? void 0 : options.port) {
         this.port = options.port;
       }
-      this.post('/devices', {
+      this.post("/devices", {
         id: this.getDeviceIdentifier(),
         userAgent: window.navigator.userAgent,
         title: window.document.title,
@@ -88,7 +88,7 @@ var capacitorCapacitorRemoteLogger = (function (exports, core) {
       return Promise.resolve();
     }
     async post(url, data) {
-      const remoteHost = this.hostName + ':' + this.port;
+      const remoteHost = this.hostName + ":" + this.port;
       if (!data) {
         return Promise.resolve();
       }
@@ -96,10 +96,10 @@ var capacitorCapacitorRemoteLogger = (function (exports, core) {
       try {
         //@ts-ignore
         const response = await fetch(remoteUrl, {
-          method: 'post',
+          method: "post",
           headers: {
             // eslint-disable-next-line @typescript-eslint/naming-convention
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
         });
@@ -108,7 +108,7 @@ var capacitorCapacitorRemoteLogger = (function (exports, core) {
         RemoteLoggerWeb.privateLog.call(
           this,
           `Failed to post to ${remoteUrl}`,
-          data,
+          data
         );
       }
     }
@@ -116,11 +116,11 @@ var capacitorCapacitorRemoteLogger = (function (exports, core) {
     push(message, _arguments, level) {
       const args = Array.prototype.slice.call(_arguments);
       let msg = message;
-      args.forEach(element => {
-        if (msg !== '') {
-          msg += ' ';
+      args.forEach((element) => {
+        if (msg !== "") {
+          msg += " ";
         }
-        if (typeof element == 'object') {
+        if (typeof element == "object") {
           msg += JSON.stringify(element);
         } else {
           msg += element;
@@ -131,7 +131,7 @@ var capacitorCapacitorRemoteLogger = (function (exports, core) {
       if (!this.pending) {
         setTimeout(() => {
           // Push pending log entries. We wait around for 1 second to see how much accumulates
-          this.post('/log', this.pending);
+          this.post("/log", this.pending);
           this.pending = undefined;
         }, 500);
         this.pending = [];
@@ -168,7 +168,7 @@ var capacitorCapacitorRemoteLogger = (function (exports, core) {
 
   exports.RemoteLogger = RemoteLogger$1;
 
-  Object.defineProperty(exports, '__esModule', { value: true });
+  Object.defineProperty(exports, "__esModule", { value: true });
 
   return exports;
 })({}, capacitorExports);
