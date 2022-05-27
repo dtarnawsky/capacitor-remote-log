@@ -6,6 +6,8 @@ const CapacitorRemoteLogger = registerPlugin<CapacitorRemoteLoggerPlugin>(
   'CapacitorRemoteLogger',
   {
     web: () => import('./web').then(m => new m.RemoteLoggerWeb()),
+    ios: () => import('./web').then(m => new m.RemoteLoggerWeb()),
+    android: () => import('./web').then(m => new m.RemoteLoggerWeb()),
   },
 );
 
