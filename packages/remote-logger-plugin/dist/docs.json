@@ -41,7 +41,7 @@
       },
       {
         "name": "addListener",
-        "signature": "(eventName: 'logStatusChange', listenerFunc: (status: LogStatus) => void) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "signature": "(eventName: \"logStatusChange\", listenerFunc: (status: LogStatus) => void) => Promise<PluginListenerHandle> & PluginListenerHandle",
         "parameters": [
           {
             "name": "eventName",

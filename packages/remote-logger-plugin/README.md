@@ -61,7 +61,7 @@ Initialize the plugin
 ### addListener('logStatusChange', ...)
 
 ```typescript
-addListener(eventName: 'logStatusChange', listenerFunc: (status: LogStatus) => void) => Promise<PluginListenerHandle> & PluginListenerHandle
+addListener(eventName: "logStatusChange", listenerFunc: (status: LogStatus) => void) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
 Listens for status changes.
