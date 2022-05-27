@@ -1,0 +1,161 @@
+{
+  "api": {
+    "name": "CapacitorRemoteLoggerPlugin",
+    "slug": "capacitorremoteloggerplugin",
+    "docs": "",
+    "tags": [],
+    "methods": [
+      {
+        "name": "write",
+        "signature": "(message: object) => any",
+        "parameters": [
+          {
+            "name": "message",
+            "docs": "",
+            "type": "object"
+          }
+        ],
+        "returns": "any",
+        "tags": [],
+        "docs": "Log a message (js object) to the remote logging service",
+        "complexTypes": [],
+        "slug": "write"
+      },
+      {
+        "name": "initialize",
+        "signature": "(options: Options) => any",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "Options"
+          }
+        ],
+        "returns": "any",
+        "tags": [],
+        "docs": "Initialize the plugin",
+        "complexTypes": [
+          "Options"
+        ],
+        "slug": "initialize"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'logStatusChange', listenerFunc: (status: LogStatus) => void) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'logStatusChange'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(status: LogStatus) => void"
+          }
+        ],
+        "returns": "any",
+        "tags": [],
+        "docs": "Listens for status changes.",
+        "complexTypes": [
+          "LogStatus",
+          "PluginListenerHandle"
+        ],
+        "slug": "addlistenerlogstatuschange"
+      },
+      {
+        "name": "removeAllListeners",
+        "signature": "() => any",
+        "parameters": [],
+        "returns": "any",
+        "tags": [],
+        "docs": "Removes all listeners",
+        "complexTypes": [],
+        "slug": "removealllisteners"
+      }
+    ],
+    "properties": [
+      {
+        "name": "hostName",
+        "tags": [],
+        "docs": "Hostname of the remote logging service",
+        "complexTypes": [],
+        "type": "string"
+      },
+      {
+        "name": "port",
+        "tags": [],
+        "docs": "Port number of the remote logging service",
+        "complexTypes": [],
+        "type": "number"
+      }
+    ]
+  },
+  "interfaces": [
+    {
+      "name": "Options",
+      "slug": "options",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "hostName",
+          "tags": [],
+          "docs": "Host name of the remote logging server",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "port",
+          "tags": [],
+          "docs": "Port number of the remote logging server",
+          "complexTypes": [],
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "name": "LogStatus",
+      "slug": "logstatus",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "code",
+          "tags": [],
+          "docs": "Status Code",
+          "complexTypes": [],
+          "type": "'error' | 'network' | 'ok'"
+        },
+        {
+          "name": "message",
+          "tags": [],
+          "docs": "Message",
+          "complexTypes": [],
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "PluginListenerHandle",
+      "slug": "pluginlistenerhandle",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "remove",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "() => any"
+        }
+      ]
+    }
+  ],
+  "enums": [],
+  "typeAliases": [],
+  "pluginConfigs": []
+}
