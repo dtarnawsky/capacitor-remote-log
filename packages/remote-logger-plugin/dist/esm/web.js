@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { WebPlugin } from "@capacitor/core";
+import { WebPlugin } from '@capacitor/core';
 export class RemoteLoggerWeb extends WebPlugin {
   constructor() {
     super();
-    this.hostName = "localhost";
+    this.hostName = 'localhost';
     this.port = 8942;
     this.pending = undefined;
     if (RemoteLoggerWeb.that === undefined) {
@@ -18,20 +18,20 @@ export class RemoteLoggerWeb extends WebPlugin {
       window.console.error = this.error;
       window.console.info = this.info;
     }
-    this.notifyListeners("logStatusChange", {
-      code: "code",
-      message: "RemoteLogger Started.",
+    this.notifyListeners('logStatusChange', {
+      code: 'code',
+      message: 'RemoteLogger Started.',
     });
   }
   write(ob) {
     switch (ob.level) {
-      case "warn":
+      case 'warn':
         this.warn(ob.message);
         break;
-      case "error":
+      case 'error':
         this.error(ob.message);
         break;
-      case "info":
+      case 'info':
         this.info(ob.message);
         break;
       default:
@@ -41,19 +41,19 @@ export class RemoteLoggerWeb extends WebPlugin {
   }
   log(message, ...args) {
     RemoteLoggerWeb.privateLog.call(this, message, ...args);
-    RemoteLoggerWeb.that.push(message, args, "log");
+    RemoteLoggerWeb.that.push(message, args, 'log');
   }
   warn(message, ...args) {
     RemoteLoggerWeb.privateWarn.call(this, message, ...args);
-    RemoteLoggerWeb.that.push(message, args, "warn");
+    RemoteLoggerWeb.that.push(message, args, 'warn');
   }
   error(message, ...args) {
     RemoteLoggerWeb.privateError.call(this, message, ...args);
-    RemoteLoggerWeb.that.push(message, args, "error");
+    RemoteLoggerWeb.that.push(message, args, 'error');
   }
   info(message, ...args) {
     RemoteLoggerWeb.privateInfo.call(this, message, ...args);
-    RemoteLoggerWeb.that.push(message, args, "info");
+    RemoteLoggerWeb.that.push(message, args, 'info');
   }
   initialize(options) {
     let lastUrl;
@@ -63,7 +63,7 @@ export class RemoteLoggerWeb extends WebPlugin {
     if (options === null || options === void 0 ? void 0 : options.port) {
       this.port = options.port;
     }
-    this.post("/devices", {
+    this.post('/devices', {
       id: this.getDeviceIdentifier(),
       userAgent: window.navigator.userAgent,
       title: window.document.title,
@@ -78,7 +78,7 @@ export class RemoteLoggerWeb extends WebPlugin {
     return Promise.resolve();
   }
   async post(url, data) {
-    const remoteHost = this.hostName + ":" + this.port;
+    const remoteHost = this.hostName + ':' + this.port;
     if (!data) {
       return Promise.resolve();
     }
@@ -86,10 +86,10 @@ export class RemoteLoggerWeb extends WebPlugin {
     try {
       //@ts-ignore
       const response = await fetch(remoteUrl, {
-        method: "post",
+        method: 'post',
         headers: {
           // eslint-disable-next-line @typescript-eslint/naming-convention
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
@@ -98,7 +98,7 @@ export class RemoteLoggerWeb extends WebPlugin {
       RemoteLoggerWeb.privateLog.call(
         this,
         `Failed to post to ${remoteUrl}`,
-        data
+        data,
       );
     }
   }
@@ -106,11 +106,11 @@ export class RemoteLoggerWeb extends WebPlugin {
   push(message, _arguments, level) {
     const args = Array.prototype.slice.call(_arguments);
     let msg = message;
-    args.forEach((element) => {
-      if (msg !== "") {
-        msg += " ";
+    args.forEach(element => {
+      if (msg !== '') {
+        msg += ' ';
       }
-      if (typeof element == "object") {
+      if (typeof element == 'object') {
         msg += JSON.stringify(element);
       } else {
         msg += element;
@@ -121,7 +121,7 @@ export class RemoteLoggerWeb extends WebPlugin {
     if (!this.pending) {
       setTimeout(() => {
         // Push pending log entries. We wait around for 1 second to see how much accumulates
-        this.post("/log", this.pending);
+        this.post('/log', this.pending);
         this.pending = undefined;
       }, 500);
       this.pending = [];

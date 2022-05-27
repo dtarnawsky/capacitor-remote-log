@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { WebPlugin } from "@capacitor/core";
+import { WebPlugin } from '@capacitor/core';
 
 import type {
   Options,
   CapacitorRemoteLoggerPlugin,
   LogMessage,
-} from "./definitions";
+} from './definitions';
 
 export class RemoteLoggerWeb
   extends WebPlugin
@@ -17,7 +17,7 @@ export class RemoteLoggerWeb
   private static privateWarn: (...data: any[]) => void;
   private static privateError: (...data: any[]) => void;
   private static privateInfo: (...data: any[]) => void;
-  public hostName = "localhost";
+  public hostName = 'localhost';
   public port = 8942;
 
   private deviceIdentifier: string | undefined;
@@ -39,21 +39,21 @@ export class RemoteLoggerWeb
       window.console.info = this.info;
     }
 
-    this.notifyListeners("logStatusChange", {
-      code: "code",
-      message: "RemoteLogger Started.",
+    this.notifyListeners('logStatusChange', {
+      code: 'code',
+      message: 'RemoteLogger Started.',
     });
   }
 
   public write(ob: LogMessage): Promise<void> {
     switch (ob.level) {
-      case "warn":
+      case 'warn':
         this.warn(ob.message);
         break;
-      case "error":
+      case 'error':
         this.error(ob.message);
         break;
-      case "info":
+      case 'info':
         this.info(ob.message);
         break;
       default:
@@ -64,22 +64,22 @@ export class RemoteLoggerWeb
 
   public log(message: any, ...args: any[]): void {
     RemoteLoggerWeb.privateLog.call(this, message, ...args);
-    RemoteLoggerWeb.that.push(message, args, "log");
+    RemoteLoggerWeb.that.push(message, args, 'log');
   }
 
   public warn(message: any, ...args: any[]): void {
     RemoteLoggerWeb.privateWarn.call(this, message, ...args);
-    RemoteLoggerWeb.that.push(message, args, "warn");
+    RemoteLoggerWeb.that.push(message, args, 'warn');
   }
 
   public error(message: any, ...args: any[]): void {
     RemoteLoggerWeb.privateError.call(this, message, ...args);
-    RemoteLoggerWeb.that.push(message, args, "error");
+    RemoteLoggerWeb.that.push(message, args, 'error');
   }
 
   public info(message: any, ...args: any[]): void {
     RemoteLoggerWeb.privateInfo.call(this, message, ...args);
-    RemoteLoggerWeb.that.push(message, args, "info");
+    RemoteLoggerWeb.that.push(message, args, 'info');
   }
 
   public initialize(options: Options): Promise<void> {
@@ -90,7 +90,7 @@ export class RemoteLoggerWeb
     if (options?.port) {
       this.port = options.port;
     }
-    this.post("/devices", {
+    this.post('/devices', {
       id: this.getDeviceIdentifier(),
       userAgent: window.navigator.userAgent,
       title: window.document.title,
@@ -107,7 +107,7 @@ export class RemoteLoggerWeb
   }
 
   async post(url: string, data: any): Promise<any> {
-    const remoteHost = this.hostName + ":" + this.port;
+    const remoteHost = this.hostName + ':' + this.port;
     if (!data) {
       return Promise.resolve();
     }
@@ -115,10 +115,10 @@ export class RemoteLoggerWeb
     try {
       //@ts-ignore
       const response: Response = await fetch(remoteUrl, {
-        method: "post",
+        method: 'post',
         headers: {
           // eslint-disable-next-line @typescript-eslint/naming-convention
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
@@ -127,7 +127,7 @@ export class RemoteLoggerWeb
       RemoteLoggerWeb.privateLog.call(
         this,
         `Failed to post to ${remoteUrl}`,
-        data
+        data,
       );
     }
   }
@@ -136,11 +136,11 @@ export class RemoteLoggerWeb
   private push(message: any, _arguments: any, level: any): void {
     const args = Array.prototype.slice.call(_arguments);
     let msg = message;
-    args.forEach((element) => {
-      if (msg !== "") {
-        msg += " ";
+    args.forEach(element => {
+      if (msg !== '') {
+        msg += ' ';
       }
-      if (typeof element == "object") {
+      if (typeof element == 'object') {
         msg += JSON.stringify(element);
       } else {
         msg += element;
@@ -152,7 +152,7 @@ export class RemoteLoggerWeb
     if (!this.pending) {
       setTimeout(() => {
         // Push pending log entries. We wait around for 1 second to see how much accumulates
-        this.post("/log", this.pending);
+        this.post('/log', this.pending);
         this.pending = undefined;
       }, 500);
       this.pending = [];
