@@ -5,16 +5,15 @@ import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 @CapacitorPlugin(name = "CapacitorRemoteLogger")
 public class CapacitorRemoteLoggerPlugin extends Plugin {
+
     String host = "";
     Integer port = 8942;
 
@@ -42,29 +41,31 @@ public class CapacitorRemoteLoggerPlugin extends Plugin {
     }
 
     private void sendPost(String urlAddress, String data) {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(urlAddress);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-                    conn.setRequestProperty("Accept","application/json");
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
+        Thread thread = new Thread(
+            new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        URL url = new URL(urlAddress);
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        conn.setRequestMethod("POST");
+                        conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                        conn.setRequestProperty("Accept", "application/json");
+                        conn.setDoOutput(true);
+                        conn.setDoInput(true);
 
-                    DataOutputStream os = new DataOutputStream(conn.getOutputStream());
-                    //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
-                    os.writeBytes(data);
-                    os.flush();
-                    os.close();
-                    conn.disconnect();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                        DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                        //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
+                        os.writeBytes(data);
+                        os.flush();
+                        os.close();
+                        conn.disconnect();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-        });
+        );
 
         thread.start();
     }
