@@ -1,7 +1,7 @@
 import { registerPlugin } from '@capacitor/core';
-const RemoteLogger = registerPlugin('RemoteLogger', {
+const CapacitorRemoteLogger = registerPlugin('CapacitorRemoteLogger', {
   web: () => import('./web').then(m => new m.RemoteLoggerWeb()),
 });
 export * from './definitions';
-export { RemoteLogger };
+export { CapacitorRemoteLogger };
 //# sourceMappingURL=index.js.map

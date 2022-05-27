@@ -148,6 +148,6 @@ export class RemoteLoggerWeb extends WebPlugin {
     return id.toString();
   }
 }
-const RemoteLogger = new RemoteLoggerWeb();
-export { RemoteLogger };
+const CapacitorRemoteLogger = new RemoteLoggerWeb();
+export { CapacitorRemoteLogger };
 //# sourceMappingURL=web.js.map

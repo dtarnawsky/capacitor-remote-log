@@ -4,7 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var core = require('@capacitor/core');
 
-const RemoteLogger$1 = core.registerPlugin('RemoteLogger', {
+const CapacitorRemoteLogger$1 = core.registerPlugin('CapacitorRemoteLogger', {
   web: () =>
     Promise.resolve()
       .then(function () {
@@ -161,13 +161,13 @@ class RemoteLoggerWeb extends core.WebPlugin {
     return id.toString();
   }
 }
-const RemoteLogger = new RemoteLoggerWeb();
+const CapacitorRemoteLogger = new RemoteLoggerWeb();
 
 var web = /*#__PURE__*/ Object.freeze({
   __proto__: null,
   RemoteLoggerWeb: RemoteLoggerWeb,
-  RemoteLogger: RemoteLogger,
+  CapacitorRemoteLogger: CapacitorRemoteLogger,
 });
 
-exports.RemoteLogger = RemoteLogger$1;
+exports.CapacitorRemoteLogger = CapacitorRemoteLogger$1;
 //# sourceMappingURL=plugin.cjs.js.map

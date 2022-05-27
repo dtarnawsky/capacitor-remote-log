@@ -181,6 +181,6 @@ export class RemoteLoggerWeb
   }
 }
 
-const RemoteLogger = new RemoteLoggerWeb();
+const CapacitorRemoteLogger = new RemoteLoggerWeb();
 
-export { RemoteLogger };
+export { CapacitorRemoteLogger };

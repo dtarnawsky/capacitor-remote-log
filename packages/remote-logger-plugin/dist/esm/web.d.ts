@@ -29,5 +29,5 @@ export declare class RemoteLoggerWeb
   private push;
   private getDeviceIdentifier;
 }
-declare const RemoteLogger: RemoteLoggerWeb;
-export { RemoteLogger };
+declare const CapacitorRemoteLogger: RemoteLoggerWeb;
+export { CapacitorRemoteLogger };

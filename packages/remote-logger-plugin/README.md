@@ -27,14 +27,14 @@ npx cap sync
 ### write(...)
 
 ```typescript
-write(message: object) => any
+write(message: LogMessage) => any
 ```
 
 Log a message (js object) to the remote logging service
 
-| Param         | Type                |
-| ------------- | ------------------- |
-| **`message`** | <code>object</code> |
+| Param         | Type                                              |
+| ------------- | ------------------------------------------------- |
+| **`message`** | <code><a href="#logmessage">LogMessage</a></code> |
 
 **Returns:** <code>any</code>
 
@@ -61,7 +61,7 @@ Initialize the plugin
 ### addListener('logStatusChange', ...)
 
 ```typescript
-addListener(eventName: "logStatusChange", listenerFunc: (status: LogStatus) => void) => Promise<PluginListenerHandle> & PluginListenerHandle
+addListener(eventName: 'logStatusChange', listenerFunc: (status: LogStatus) => void) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
 Listens for status changes.
@@ -90,6 +90,16 @@ Removes all listeners
 
 
 ### Interfaces
+
+
+#### LogMessage
+
+| Prop          | Type                                                           | Description       |
+| ------------- | -------------------------------------------------------------- | ----------------- |
+| **`id`**      | <code>string</code>                                            | Device identifier |
+| **`level`**   | <code>'error' \| 'warn' \| 'info' \| 'trace' \| 'debug'</code> | Log Level         |
+| **`message`** | <code>string</code>                                            | Log Message       |
+| **`stack`**   | <code>string</code>                                            | Stack Trace       |
 
 
 #### Options

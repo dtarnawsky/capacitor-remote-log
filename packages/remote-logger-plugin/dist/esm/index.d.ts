@@ -1,5 +1,5 @@
 import type { CapacitorRemoteLoggerPlugin } from './definitions';
 
-declare const RemoteLogger: CapacitorRemoteLoggerPlugin;
+declare const CapacitorRemoteLogger: CapacitorRemoteLoggerPlugin;
 export * from './definitions';
-export { RemoteLogger };
+export { CapacitorRemoteLogger };

@@ -1,7 +1,7 @@
 var capacitorCapacitorRemoteLogger = (function (exports, core) {
   'use strict';
 
-  const RemoteLogger$1 = core.registerPlugin('RemoteLogger', {
+  const CapacitorRemoteLogger$1 = core.registerPlugin('CapacitorRemoteLogger', {
     web: () =>
       Promise.resolve()
         .then(function () {
@@ -158,15 +158,15 @@ var capacitorCapacitorRemoteLogger = (function (exports, core) {
       return id.toString();
     }
   }
-  const RemoteLogger = new RemoteLoggerWeb();
+  const CapacitorRemoteLogger = new RemoteLoggerWeb();
 
   var web = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     RemoteLoggerWeb: RemoteLoggerWeb,
-    RemoteLogger: RemoteLogger,
+    CapacitorRemoteLogger: CapacitorRemoteLogger,
   });
 
-  exports.RemoteLogger = RemoteLogger$1;
+  exports.CapacitorRemoteLogger = CapacitorRemoteLogger$1;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

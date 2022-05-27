@@ -12,7 +12,7 @@ export interface CapacitorRemoteLoggerPlugin {
   /**
    * Log a message (js object) to the remote logging service
    */
-  write(message: object): Promise<void>;
+  write(message: LogMessage): Promise<void>;
   /**
    * Initialize the plugin
    */
