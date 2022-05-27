@@ -16,13 +16,13 @@ export class HomePage implements OnInit {
       console.log('status is ', status);
     });
 
-    const options = { hostName: 'localhost', port: 8942};
+    const options = { hostName: 'localhost', port: 8942 };
     console.log('Calling initialize', JSON.stringify(options));
     (window as any).mikelog = console.error;
     await RemoteLogger.initialize(options);
     try {
-      await RemoteLogger.write({ txt: 'test', id: 123123, payload: 'blar' });
-    } catch(e) {
+      await RemoteLogger.write({ level: 'info', message: 'This is a sample log message' });
+    } catch (e) {
       (window as any).mikelog(e);
     }
   }
@@ -32,6 +32,6 @@ export class HomePage implements OnInit {
   }
 
   logPlugin() {
-    RemoteLogger.write(new Date());
+    RemoteLogger.write({level: 'warn', message: `Yo! Its ${new Date()}`});
   }
 }
