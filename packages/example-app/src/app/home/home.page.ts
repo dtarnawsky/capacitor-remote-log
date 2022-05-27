@@ -9,8 +9,6 @@ export class HomePage implements OnInit {
   constructor() { }
 
   async ngOnInit() {
-    // RemoteLogger.hostName = 'localhost';
-    // RemoteLogger.port = 8942;
     CapacitorRemoteLogger.addListener('logStatusChange', (status: LogStatus) => {
       console.log('status is ', status);
     });
