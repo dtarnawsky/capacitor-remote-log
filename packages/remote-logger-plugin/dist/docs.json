@@ -6,24 +6,6 @@
     "tags": [],
     "methods": [
       {
-        "name": "write",
-        "signature": "(message: LogMessage) => any",
-        "parameters": [
-          {
-            "name": "message",
-            "docs": "",
-            "type": "LogMessage"
-          }
-        ],
-        "returns": "any",
-        "tags": [],
-        "docs": "Log a message (js object) to the remote logging service",
-        "complexTypes": [
-          "LogMessage"
-        ],
-        "slug": "write"
-      },
-      {
         "name": "initialize",
         "signature": "(options: Options) => any",
         "parameters": [
@@ -40,6 +22,24 @@
           "Options"
         ],
         "slug": "initialize"
+      },
+      {
+        "name": "write",
+        "signature": "(message: LogMessage) => any",
+        "parameters": [
+          {
+            "name": "message",
+            "docs": "",
+            "type": "LogMessage"
+          }
+        ],
+        "returns": "any",
+        "tags": [],
+        "docs": "Log a message (js object) to the remote logging service",
+        "complexTypes": [
+          "LogMessage"
+        ],
+        "slug": "write"
       },
       {
         "name": "addListener",
@@ -76,24 +76,32 @@
         "slug": "removealllisteners"
       }
     ],
-    "properties": [
-      {
-        "name": "hostName",
-        "tags": [],
-        "docs": "Hostname of the remote logging service",
-        "complexTypes": [],
-        "type": "string"
-      },
-      {
-        "name": "port",
-        "tags": [],
-        "docs": "Port number of the remote logging service",
-        "complexTypes": [],
-        "type": "number"
-      }
-    ]
+    "properties": []
   },
   "interfaces": [
+    {
+      "name": "Options",
+      "slug": "options",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "hostName",
+          "tags": [],
+          "docs": "Host name of the remote logging server",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "port",
+          "tags": [],
+          "docs": "Port number of the remote logging server",
+          "complexTypes": [],
+          "type": "number"
+        }
+      ]
+    },
     {
       "name": "LogMessage",
       "slug": "logmessage",
@@ -128,29 +136,6 @@
           "docs": "Stack Trace",
           "complexTypes": [],
           "type": "string | undefined"
-        }
-      ]
-    },
-    {
-      "name": "Options",
-      "slug": "options",
-      "docs": "",
-      "tags": [],
-      "methods": [],
-      "properties": [
-        {
-          "name": "hostName",
-          "tags": [],
-          "docs": "Host name of the remote logging server",
-          "complexTypes": [],
-          "type": "string"
-        },
-        {
-          "name": "port",
-          "tags": [],
-          "docs": "Port number of the remote logging server",
-          "complexTypes": [],
-          "type": "number"
         }
       ]
     },

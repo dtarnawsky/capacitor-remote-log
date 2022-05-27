@@ -17,7 +17,7 @@ export class RemoteLoggerWeb
   private static privateWarn: (...data: any[]) => void;
   private static privateError: (...data: any[]) => void;
   private static privateInfo: (...data: any[]) => void;
-  public hostName = 'localhost';
+  public hostName = '';
   public port = 8942;
 
   private deviceIdentifier: string | undefined;
@@ -85,10 +85,10 @@ export class RemoteLoggerWeb
   public initialize(options: Options): Promise<void> {
     let lastUrl: string;
     if (options?.hostName) {
-      this.hostName = options.hostName;
+      RemoteLoggerWeb.that.hostName = options.hostName;
     }
     if (options?.port) {
-      this.port = options.port;
+      RemoteLoggerWeb.that.port = options.port;
     }
     this.post('/devices', {
       id: this.getDeviceIdentifier(),
@@ -107,7 +107,8 @@ export class RemoteLoggerWeb
   }
 
   async post(url: string, data: any): Promise<any> {
-    const remoteHost = this.hostName + ':' + this.port;
+    const remoteHost =
+      RemoteLoggerWeb.that.hostName + ':' + RemoteLoggerWeb.that.port;
     if (!data) {
       return Promise.resolve();
     }

@@ -2,21 +2,13 @@ import type { PluginListenerHandle } from '@capacitor/core';
 
 export interface CapacitorRemoteLoggerPlugin {
   /**
-   * Hostname of the remote logging service
+   * Initialize the plugin
    */
-  hostName: string;
-  /**
-   * Port number of the remote logging service
-   */
-  port: number;
+  initialize(options: Options): Promise<void>;
   /**
    * Log a message (js object) to the remote logging service
    */
   write(message: LogMessage): Promise<void>;
-  /**
-   * Initialize the plugin
-   */
-  initialize(options: Options): Promise<void>;
   /**
    * Listens for status changes.
    */

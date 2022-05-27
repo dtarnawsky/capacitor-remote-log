@@ -4,7 +4,7 @@ import { WebPlugin } from '@capacitor/core';
 export class RemoteLoggerWeb extends WebPlugin {
   constructor() {
     super();
-    this.hostName = 'localhost';
+    this.hostName = '';
     this.port = 8942;
     this.pending = undefined;
     if (RemoteLoggerWeb.that === undefined) {
@@ -58,10 +58,10 @@ export class RemoteLoggerWeb extends WebPlugin {
   initialize(options) {
     let lastUrl;
     if (options === null || options === void 0 ? void 0 : options.hostName) {
-      this.hostName = options.hostName;
+      RemoteLoggerWeb.that.hostName = options.hostName;
     }
     if (options === null || options === void 0 ? void 0 : options.port) {
-      this.port = options.port;
+      RemoteLoggerWeb.that.port = options.port;
     }
     this.post('/devices', {
       id: this.getDeviceIdentifier(),
@@ -78,7 +78,8 @@ export class RemoteLoggerWeb extends WebPlugin {
     return Promise.resolve();
   }
   async post(url, data) {
-    const remoteHost = this.hostName + ':' + this.port;
+    const remoteHost =
+      RemoteLoggerWeb.that.hostName + ':' + RemoteLoggerWeb.that.port;
     if (!data) {
       return Promise.resolve();
     }

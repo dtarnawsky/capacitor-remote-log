@@ -13,8 +13,8 @@ npx cap sync
 
 <docgen-index>
 
-* [`write(...)`](#write)
 * [`initialize(...)`](#initialize)
+* [`write(...)`](#write)
 * [`addListener('logStatusChange', ...)`](#addlistenerlogstatuschange)
 * [`removeAllListeners()`](#removealllisteners)
 * [Interfaces](#interfaces)
@@ -23,23 +23,6 @@ npx cap sync
 
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
-
-### write(...)
-
-```typescript
-write(message: LogMessage) => any
-```
-
-Log a message (js object) to the remote logging service
-
-| Param         | Type                                              |
-| ------------- | ------------------------------------------------- |
-| **`message`** | <code><a href="#logmessage">LogMessage</a></code> |
-
-**Returns:** <code>any</code>
-
---------------------
-
 
 ### initialize(...)
 
@@ -52,6 +35,23 @@ Initialize the plugin
 | Param         | Type                                        |
 | ------------- | ------------------------------------------- |
 | **`options`** | <code><a href="#options">Options</a></code> |
+
+**Returns:** <code>any</code>
+
+--------------------
+
+
+### write(...)
+
+```typescript
+write(message: LogMessage) => any
+```
+
+Log a message (js object) to the remote logging service
+
+| Param         | Type                                              |
+| ------------- | ------------------------------------------------- |
+| **`message`** | <code><a href="#logmessage">LogMessage</a></code> |
 
 **Returns:** <code>any</code>
 
@@ -92,6 +92,14 @@ Removes all listeners
 ### Interfaces
 
 
+#### Options
+
+| Prop           | Type                | Description                              |
+| -------------- | ------------------- | ---------------------------------------- |
+| **`hostName`** | <code>string</code> | Host name of the remote logging server   |
+| **`port`**     | <code>number</code> | Port number of the remote logging server |
+
+
 #### LogMessage
 
 | Prop          | Type                                                           | Description       |
@@ -100,14 +108,6 @@ Removes all listeners
 | **`level`**   | <code>'error' \| 'warn' \| 'info' \| 'trace' \| 'debug'</code> | Log Level         |
 | **`message`** | <code>string</code>                                            | Log Message       |
 | **`stack`**   | <code>string</code>                                            | Stack Trace       |
-
-
-#### Options
-
-| Prop           | Type                | Description                              |
-| -------------- | ------------------- | ---------------------------------------- |
-| **`hostName`** | <code>string</code> | Host name of the remote logging server   |
-| **`port`**     | <code>number</code> | Port number of the remote logging server |
 
 
 #### LogStatus
